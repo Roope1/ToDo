@@ -17,15 +17,7 @@ def user_action() -> str:
 def main() -> None:
     tasks = task_lib.Tasks()
     tasks.init_db()
-
-
-    
-    # TODO: MOVE TO LIB
-    # add all existing tasks to the list
-    for task in tasks.fetch_tasks():
-        new_task = task_lib.Task(task[1],task[2], task[3])
-        tasks.add_existing(new_task)
-
+    tasks.init_existing()
 
     while True:
         user_choice = user_action()
@@ -38,13 +30,13 @@ def main() -> None:
                 tasks.show_all()
                 
             case "3":
-                change_task_status()
+                tasks.change_task_status()
                 
             case "4":
-                delete_task()
+                tasks.delete_task()
                 
             case "5":
-                edit_task()
+                tasks.edit_task()
                 
             case "0":
                 tasks.close()
